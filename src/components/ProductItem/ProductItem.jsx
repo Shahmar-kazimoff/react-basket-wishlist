@@ -1,10 +1,23 @@
+import { FaRegHeart } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
+import { useWishlist } from "../Context/Context";
+
 const ProductItem = ({ product, cart, setCart }) => {
+    const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
+    const toggleWishlist = () => {
+        if (isInWishlist(product.id)) {
+            removeFromWishlist(product.id);
+        } else {
+            addToWishlist(product);
+        }
+    };
+
     const addToCart = (product) => {
         setCart([...cart, product])
     }
 
     return (
-        <div className="border p-1 m-2 rounded-lg shadow-lg">
+        <div className="border p-1 m-2 rounded-lg shadow-lg relative">
             <img
                 className="border w-full object-cover"
                 src={product.image}
@@ -16,6 +29,9 @@ const ProductItem = ({ product, cart, setCart }) => {
                     className="bg-black py-2 text-white lg:text-xl text-xs rounded hover:bg-green-800 w-full  duration-200"
                     onClick={() => addToCart(product)}>Add to Cart</button>
             </div>
+            <button className="absolute top-2" onClick={toggleWishlist}>
+                {isInWishlist(product.id) ? <FaHeart /> : <FaRegHeart />}
+            </button>
         </div>
     )
 }

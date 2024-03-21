@@ -29,11 +29,13 @@ const Cart = ({ cart, emptyCart, toggleCartVisibility, setCart }) => {
     const renderGroupedCart = () => {
         const groupedCart = calculateGroupedCart();
         return Object.values(groupedCart).map((item, index) => (
-            <li key={index} className="mt-2 flex justify-between">
+            <li key={index} className="mt-2 flex justify-between ">
                 <span>{item.product.name} x{item.quantity}</span>
-                <span>${item.totalPrice}</span>
-                <button className="text-red-500" onClick={() => removeFromCart(item.product.id)}><MdDelete />
-                </button>
+                <div className="flex gap-2">
+                    <span>${item.totalPrice}</span>
+                    <button className="text-red-500" onClick={() => removeFromCart(item.product.id)}><MdDelete />
+                    </button>
+                </div>
             </li>
         ));
     };
