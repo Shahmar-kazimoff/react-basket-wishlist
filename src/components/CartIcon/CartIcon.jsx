@@ -4,11 +4,11 @@ import Cart from "../Cart/Cart";
 
 const CartIcon = ({ cart, setCart, emptyCart }) => {
     const [cartVisible, setCartVisible] = useState(false);
-
+    
     const toggleCartVisibility = () => {
         setCartVisible(!cartVisible);
     };
-
+    
     return (
         <div className="relative">
             <FiShoppingCart onClick={toggleCartVisibility} className="text-2xl cursor-pointer text-white"/>

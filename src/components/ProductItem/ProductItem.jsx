@@ -1,6 +1,8 @@
 import { FaRegHeart } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 import { useWishlist } from "../Context/Context";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ProductItem = ({ product, cart, setCart }) => {
     const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
@@ -9,8 +11,11 @@ const ProductItem = ({ product, cart, setCart }) => {
             removeFromWishlist(product.id);
         } else {
             addToWishlist(product);
+            setTimeout(notify, 100);
         }
     };
+
+    const notify = () => toast("Product added to Wishlist!");
 
     const addToCart = (product) => {
         setCart([...cart, product])
@@ -30,8 +35,9 @@ const ProductItem = ({ product, cart, setCart }) => {
                     onClick={() => addToCart(product)}>Add to Cart</button>
             </div>
             <button className="absolute top-2" onClick={toggleWishlist}>
-                {isInWishlist(product.id) ? <FaHeart /> : <FaRegHeart />}
+                {isInWishlist(product.id) ? <FaHeart className="text-red-500" /> : <FaRegHeart />}
             </button>
+            <ToastContainer />
         </div>
     )
 }
